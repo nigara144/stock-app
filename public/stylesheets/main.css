@@ -1,0 +1,24 @@
+body{
+    background: rgb(125, 103, 177);  
+    background: -webkit-linear-gradient(to right, #E9E4F0, #D3CCE3);  
+    background: linear-gradient(to right, #E9E4F0, #D3CCE3); 
+}
+.navbar{
+    background: #27142e;
+    font-family: Gayathri;
+}
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+.navbar-default .navbar-nav>li>a{
+    color: white;
+    margin-top: 10%;
+}
+.navbar-default .navbar-brand{
+    color: rgba(255, 255, 255, 0.747);
+    font-size: 1.5em;
+    margin-top: 5%;
+}

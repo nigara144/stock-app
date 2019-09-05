@@ -8,7 +8,7 @@ app.set("view engine", "ejs");
 app.get("/", function(req,res){
 	res.render("landing");
 });
-
+console.log("hi");
 app.listen(8080, function(){
 	console.log("Server is listening...")
 });

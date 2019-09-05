@@ -9,6 +9,7 @@ app.get("/", function(req,res){
 	res.render("landing");
 });
 
-app.listen(8000, function(){
-	console.log("Server is listening...")
+app.listen(process.argv[2], function(){
+	console.log("server listening...");
 });
+

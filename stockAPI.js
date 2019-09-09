@@ -1,11 +1,11 @@
 const request = require('request');
 
 var stockSymbols = ["AAPL", "MSFT","HSBA.L"];
-var str = "";
  
 function getStockData(stockSymbolsArray){
-    stockSymbols.forEach(Symbol => {
-        str += Symbol + ",";
+    var str = "";
+    stockSymbolsArray.forEach(symbol => {
+        str += symbol + ",";
     });
     var newStr = str.slice(0, str.length-1);
 
@@ -13,12 +13,13 @@ function getStockData(stockSymbolsArray){
         if(err){
             console.log(err);
         }else{
-            console.log(body);
+            return body;
         }
     });
 }
 
 getStockData(stockSymbols);
+
 
 
 

@@ -1,11 +1,11 @@
 body{
-    background: rgb(125, 103, 177);  
-    background: -webkit-linear-gradient(to right, #E9E4F0, #D3CCE3);  
-    background: linear-gradient(to right, #E9E4F0, #D3CCE3); 
+    background: #3A1C71;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FFAF7B, #D76D77, #3A1C71);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FFAF7B, #D76D77, #3A1C71); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    font-family:  'Merriweather', serif;
 }
 .navbar{
-    background: #27142e;
-    font-family: Gayathri;
+    background: #ffffff;
 }
 .center {
     display: block;
@@ -14,11 +14,11 @@ body{
     width: 50%;
 }
 .navbar-default .navbar-nav>li>a{
-    color: white;
+    color: rgb(4, 3, 43);
     margin-top: 10%;
 }
 .navbar-default .navbar-brand{
-    color: rgba(255, 255, 255, 0.747);
-    font-size: 1.5em;
+    color: rgba(5, 6, 54, 0.747);
+    font-size: 1.8em;
     margin-top: 5%;
 }

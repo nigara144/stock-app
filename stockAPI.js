@@ -1,4 +1,4 @@
-const request = require('request');
+const request = require('sync-request');
 
 var stockSymbols = ["AAPL", "MSFT","HSBA.L"];
  
@@ -8,19 +8,19 @@ function getStockData(stockSymbolsArray){
         str += symbol + ",";
     });
     var newStr = str.slice(0, str.length-1);
-
-    request('https://api.worldtradingdata.com/api/v1/stock?symbol='+ newStr +'&api_token=pFeLPYkfvXHhfcF5YG3M6LNYueU2mlizlL2s57b3Z97SbJsifvzhQo1pcY5w', {json: true}, (err, res, body) => {
-        if(err){
-            console.log(err);
-        }else{ 
-            console.log(res.body);
-            return res.body;
-        }
-    });
+   
+    try {
+        var res;
+        res = request('GET','https://api.worldtradingdata.com/api/v1/stock?symbol='+ newStr +'&api_token=pFeLPYkfvXHhfcF5YG3M6LNYueU2mlizlL2s57b3Z97SbJsifvzhQo1pcY5w',{json: true});
+        var res2 = res.getBody().toString();
+        var res3 = JSON.parse(res2);
+        return res3;
+    } catch (error) {
+        throw error;
+    }
 }
 
-getStockData(stockSymbols);
-
+console.log(getStockData(stockSymbols));
 
 
 

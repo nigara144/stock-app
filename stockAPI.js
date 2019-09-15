@@ -1,6 +1,6 @@
 const request = require('sync-request');
 
-var stockSymbols = ["AAPL", "MSFT","HSBA.L"];
+var stockSymbols = ["AAPL"];
  
 function getStockData(stockSymbolsArray){
     var str = "";
@@ -20,7 +20,9 @@ function getStockData(stockSymbolsArray){
     }
 }
 
-console.log(getStockData(stockSymbols));
+// console.log(getStockData(stockSymbols));
+module.exports.getStockData = getStockData;
+module.exports.stockSymbols = stockSymbols;
 
 
 

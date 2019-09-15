@@ -1,11 +1,23 @@
 <% include ./partials/header %>
 
-<div class="wrap">
-        <div class="search">
-           <input type="text" class="searchTerm" placeholder="What are you looking for?">
-           <button type="submit" class="searchButton">
-             <i class="fa fa-search">Search</i>
-          </button>
-        </div>
-     </div>
+   <div class="container">
+      <div class="wrap">
+         <!-- <div class="search"> -->
+            <form action="/newStock" method="GET">
+               <input type="text" class="searchTerm" placeholder="What are you looking for?" name="search">
+               <button type="submit" class="searchButton">
+                  <i class="fa fa-search">Search</i>
+               </button>
+         </form>
+         <!-- </div> -->
+      </div>
+      
+      <div class="jumbotron">
+         <h2>Stock Data:</h2>
+            <% data["data"].forEach(function(stock){ %>
+               <%= stock["name"] %>
+            <% }) %>
+
+      </div> 
+   </div>
 <% include ./partials/footer %>

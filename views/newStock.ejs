@@ -4,7 +4,7 @@
       <div class="wrap">
          <!-- <div class="search"> -->
             <form action="/newStock" method="GET">
-               <input type="text" class="searchTerm" placeholder="What are you looking for?" name="search">
+               <input required type="text" class="searchTerm" placeholder="What are you looking for?" name="search">
                <button type="submit" class="searchButton">
                   <i class="fa fa-search">Search</i>
                </button>
@@ -13,11 +13,20 @@
       </div>
       
       <div class="jumbotron">
-         <h2>Stock Data:</h2>
-            <% data["data"].forEach(function(stock){ %>
-               <%= stock["name"] %>
-            <% }) %>
 
-      </div> 
+         <% if(Object.keys(data).toString() !== "Message"){ %>   
+               <h2>Stock Data:</h2>
+               <% data["data"].forEach(function(stock){ %>
+                  <%= stock["name"] %>
+               <% }) %>
+         <% }else{ %>
+               <p>You have inserted a wrong string in the search bar!</p>
+            <% } %>
+      
+         
+
+      </div>    
+
+     
    </div>
 <% include ./partials/footer %>

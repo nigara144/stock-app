@@ -2,7 +2,43 @@
 
 <div class="container">
     <h1>My Portfolio</h1>
-    <a href="/newStock" class="btn btn-lg btn-default">Search for a New Stock</a>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Current Price</th>
+            <th>Original Price</th>
+            <th>Number of Shares</th>
+            <th>Current Sum</th>
+            <th>Original Sum</th>
+            <th>Difference</th>
+            <th>Day-High Price</th>
+            <th>Day-Low Price</th>
+            <th>Currency</th>
+
+        </tr>
+    <% if(stocks !== null && stocks !== undefined){ %>
+        <% for(var i = 0; i < stocks.length; i++){ %>
+            <% var numStocks = stocks[i].numStocks %>
+            <% var currentPrice = stocks[i].data["price"] %>
+            <% var originalPrice = stocks[i].originalPrice %>
+        <tr>
+            <td><%= stocks[i].data["name"] %></td>
+            <td><%= stocks[i].data["price"] %></td>
+            <td><%= stocks[i].originalPrice %></td>
+            <td><%= numStocks %></td>
+            <td><%= stocks[i].data["price"] * numStocks %></td>
+            <td><%= stocks[i].originalPrice * numStocks %></td>
+            <td><%= (originalPrice * numStocks) - (currentPrice * numStocks) %></td>
+            <td><%= stocks[i].data["day_high"] %></td>
+            <td><%= stocks[i].data["day_low"] %></td>
+            <td><%= stocks[i].data["currency"] %></td>
+        </tr>
+        <% } %>  
+    <% } %>    
+    </table>
+
+    <a href="/newStock" class="btn btn-lg btn-default">Search Stock</a>
 </div>
     
 

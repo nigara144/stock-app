@@ -14,7 +14,7 @@ app.get("/", function(req,res){
 });
 
 app.get("/portfolio", function(req,res){
-	res.render("portfolio");
+	res.render("portfolio", {stocks: stockAPI.stocks});
 });
 
 //show register form
@@ -34,11 +34,27 @@ app.post("/login",function(req, res){
 
 //show search page
 app.get("/newStock", function(req,res){
-	var query = req.query.search;
-	console.log("QUERY:" + query);
-	stockAPI.stockSymbols.push(query);
-	console.log(stockAPI.stockSymbols);
-	res.render("newStock", {data: stockAPI.getStockData(stockAPI.stockSymbols)});
+	//show new stock data
+	var symbol = req.query.search;
+	console.log("SYMBOL GET:" + symbol);
+	var stock;
+	if(symbol !== undefined){
+		stock = stockAPI.getStockData([symbol]);
+	}
+	res.render("newStock", {data: stock, symbols: [symbol]});
+});
+
+app.post("/newStock", function(req, res){
+	var numStocks = req.body.numofshares;
+	var originalPrice = req.body.originalprice;
+	var data = req.body.stockData;
+	console.log("STOCK DATA: "+ data + " SHARES: "+ numStocks + " PRICE: "+ originalPrice);
+	const newStock = {numStocks: numStocks, originalPrice: originalPrice, data: data}; 
+
+	stockAPI.stocks.push(newStock);
+	console.log("array: ", stockAPI.stocks);
+	res.send("stock added successfuly");
+
 });
 
 app.listen(process.argv[2], function(){

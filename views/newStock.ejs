@@ -23,17 +23,14 @@
                      <% data.forEach(function(stock){ %>
                         <% if(symbols[symbols.length - 1] == stock["symbol"]){ %>
                               <div>
-                                 <% var j = stock %>
-                                 <% var ob = JSON.stringify(j,null,2); %>
-                                 <% var str_array = ob.split(','); %>
-                                 <% for(var i = 0; i < str_array.length; i++) { %>
-                                    <h4><%=str_array[i].replace(/['"]+/g, '') %></h4>
-                                 <% } %>    
+                                 <% for(var i in stock){ %>
+                                     <%= i  %> : <%= stock[i] %><br> 
+                                 <% } %>
                               </div>
                </div>
 
                <div>
-                     <input required type="number" placeholder="number of stocks" name="numberofstocks" class="inputbox" id="numofstocks">
+                     <input required type="number" placeholder="number of stocks" name="numberofstocks" class="inputbox" id="numofstocks" min="1">
                      <input type="text" id="originalprice" name="originalprice" class="inputbox" value="<%= stock["price"] %>">
                      <button onclick="cal()" id="cost">Calculate Sum</button>
                      <strong>sum price:</strong> 
@@ -55,32 +52,36 @@
          
                <script type="text/javascript">
                   function add(){
-                     var stockData = document.getElementById("savedata").innerHTML;
-                     console.log("stock data: " + stockData);
-                     var numofshares = document.getElementById("numofstocks").value;
-                     var originalprice = document.getElementById("originalprice").value;
-                     console.log("shares: " + numofshares + "selling price: " + originalprice);
-                     //save data to local storage
-                     localStorage.setItem("data",stockData);
-                     localStorage.setItem("numOfShares", numofshares);
-                     localStorage.setItem("originalprice", originalprice);
-                     
-                     //submit the data
-                     $.ajax({
-                        type: "POST",
-                        url: "/newStock",
-                        data: {
-                           stockData: JSON.parse(localStorage.getItem("data"))[0],
-                           numofshares: localStorage.getItem("numOfShares"),
-                           originalprice: originalprice
-                        },
-                        success: function(data){
-                           alert(data);
-                        },
-                        error: function(err){
-                           alert("error:" , err);
-                        }
-                     });
+                     console.log(JSON.parse(document.getElementById("savedata").innerHTML)[0].symbol);
+
+                     if(document.getElementById("numofstocks").value > 0){
+                        var stockData = document.getElementById("savedata").innerHTML;
+                        console.log("stock data: " + stockData);
+                        var numofshares = document.getElementById("numofstocks").value;
+                        var originalprice = document.getElementById("originalprice").value;
+                        console.log("shares: " + numofshares + "selling price: " + originalprice);
+                        //save data to local storage
+                        localStorage.setItem("data",stockData);
+                        localStorage.setItem("numOfShares", numofshares);
+                        localStorage.setItem("originalprice", originalprice);
+                        
+                        //submit the data
+                        $.ajax({
+                           type: "POST",
+                           url: "/newStock",
+                           data: {
+                              stockData: JSON.parse(localStorage.getItem("data"))[0],
+                              numofshares: localStorage.getItem("numOfShares"),
+                              originalprice: originalprice
+                           },
+                           success: function(data){
+                              alert(data);
+                           },
+                           error: function(err){
+                              alert("error:" , err);
+                           }
+                        });
+                     }
                   }
                </script>
          
